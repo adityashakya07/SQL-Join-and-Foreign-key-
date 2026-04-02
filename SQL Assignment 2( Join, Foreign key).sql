@@ -34,3 +34,19 @@ INSERT INTO Projects VALUES
 SELECT * FROM Departments d
 join Employees e
 on d.dept_id = e.dept_id;
+SELECT * FROM Employees
+WHERE dept_id IS NULL;
+SELECT * FROM Departments d
+left join Employees e
+on d.dept_id = e.dept_id
+order by  d.dept_name, e.emp_name;
+SELECT e.emp_name, salary ,d.dept_name from Employees e
+join Departments d 
+on d.dept_id = e.dept_id;
+Select * from Employees e
+Join Projects p
+on e.emp_id = p.emp_id;
+SELECT * FROM Employees e
+left join Departments d
+on d.dept_id = e.dept_id 
+where d.dept_id= null ;
