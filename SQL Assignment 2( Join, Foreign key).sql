@@ -31,22 +31,41 @@ INSERT INTO Projects VALUES
 (2, 'App', 103),
 (3, 'Audit', 104),
 (4, 'Recruitment', 101);
-SELECT * FROM Departments d
+select * from Departments d
 join Employees e
 on d.dept_id = e.dept_id;
-SELECT * FROM Employees
-WHERE dept_id IS NULL;
-SELECT * FROM Departments d
+select * from Employees 
+where dept_id is null ;
+select * from Departments d
 left join Employees e
-on d.dept_id = e.dept_id
-order by  d.dept_name, e.emp_name;
-SELECT e.emp_name, salary ,d.dept_name from Employees e
-join Departments d 
-on d.dept_id = e.dept_id;
-Select * from Employees e
-Join Projects p
-on e.emp_id = p.emp_id;
-SELECT * FROM Employees e
-left join Departments d
-on d.dept_id = e.dept_id 
-where d.dept_id= null ;
+on d.dept_id = e.dept_id ;
+select e.emp_name,e.salary, dept_name from Employees e
+join Departments d
+on e.dept_id = d.dept_id;
+select * from Employees e  
+join Projects p
+on p.emp_id = e.emp_id ;
+select * from Employees
+where dept_id is null;
+select e.emp_name, project_name from Employees e  
+left join Projects p
+on p.emp_id = e.emp_id ;
+SELECT d.dept_id, d.dept_name
+FROM Departments d
+LEFT JOIN Employees e 
+    ON d.dept_id = e.dept_id
+WHERE e.emp_id IS NULL;
+SELECT e.emp_name, e.emp_id,salary , d.dept_name
+FROM Employees e
+JOIN Departments d ON e.dept_id = d.dept_id
+WHERE d.dept_name = 'HR';
+SELECT e.emp_name, d.dept_name, p.project_name
+FROM Employees e
+LEFT JOIN Departments d ON e.dept_id = d.dept_id
+LEFT JOIN Projects p ON e.emp_id = p.emp_id;
+select emp_id from Projects
+group by emp_id Having count(*) > 1; 
+SELECT d.dept_name, COUNT(e.emp_id)
+FROM Departments d
+LEFT JOIN Employees e ON d.dept_id = e.dept_id
+GROUP BY d.dept_name;
