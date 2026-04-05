@@ -69,3 +69,23 @@ SELECT d.dept_name, COUNT(e.emp_id)
 FROM Departments d
 LEFT JOIN Employees e ON d.dept_id = e.dept_id
 GROUP BY d.dept_name;
+SELECT d.dept_name, COUNT(e.emp_id)>2
+FROM Departments d
+LEFT JOIN Employees e ON d.dept_id = e.dept_id
+GROUP BY d.dept_name;
+
+
+SELECT e.emp_name FROM Employees e
+LEFT JOIN Projects p 
+ON e.emp_id = p.emp_id
+WHERE p.project_id IS NULL;
+SELECT p.project_name FROM Projects p
+LEFT JOIN Employees e
+ON p.emp_id = e.emp_id
+WHERE e.emp_id IS NULL;
+select emp_name, salary , dept_name from Employees e
+left join departments d
+on e.dept_id = d.dept_id 
+where salary>40000;
+SELECT dept_id, MAX(salary) FROM Employees
+GROUP BY dept_id;
