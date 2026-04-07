@@ -143,3 +143,40 @@ ALTER TABLE Projects
 ADD CONSTRAINT fk_emp
 FOREIGN KEY (emp_id)
 REFERENCES Employees(emp_id);
+SELECT emp_id
+FROM Projects
+GROUP BY emp_id
+HAVING COUNT(DISTINCT project_id) = (SELECT COUNT(*) FROM Projects);
+SELECT dept_id, salary, COUNT(*)
+FROM Employees
+GROUP BY dept_id, salary
+HAVING COUNT(*) > 1;
+SELECT dept_id
+FROM Employees
+GROUP BY dept_id
+ORDER BY SUM(salary) DESC
+LIMIT 1;
+SELECT *
+FROM (
+  SELECT e.*, 
+  ROW_NUMBER() OVER (PARTITION BY dept_id ORDER BY salary DESC) rn
+  FROM Employees e
+) t
+WHERE rn <= 3;
+SELECT emp_id
+FROM Projects
+GROUP BY emp_id
+ORDER BY COUNT(*) DESC
+LIMIT 1;
+SELECT dept_id
+FROM Employees
+GROUP BY dept_id
+HAVING MIN(salary) >= 30000;
+SELECT p.project_id, COUNT(e.emp_id), AVG(e.salary)
+FROM Projects p
+JOIN Employees e ON p.emp_id = e.emp_id
+GROUP BY p.project_id;
+SELECT *
+FROM Employees e
+LEFT JOIN Projects p ON e.emp_id = p.emp_id
+WHERE p.project_id IS NULL;
